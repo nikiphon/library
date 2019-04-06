@@ -8,8 +8,8 @@ For this system, we have 4 main classes here:
 * Book - has some attributes like ISBN which is used for searching and ‘available’ which is used to check
         whether the book is available to check out.  Most of the fields are immutable since we only need 
         available field to track the status.
-* Library - use to contains books and check out and check in methods which are used to change the available.
-* MainLibraryApplication - use to run the application and some other functionalities from the Scanner inputs.
+* Library - contains books and check out and check in methods which are used to change the available.
+* MainLibraryApplication - run the application and some other functionalities from the Scanner inputs.
 ```
 We have 2 main option menus.  The first option is the Login and Exit which is used to find out the main user and exit the system..  The second option we have Display all books, Display all users, Check out book, Check in book, Lend books to other users, Display all the checked out information and Exit.
 ```
