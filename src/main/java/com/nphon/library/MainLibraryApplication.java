@@ -2,7 +2,7 @@ package com.nphon.library;
 
 import java.util.*;
 
-public class MainLibrary {
+public class MainLibraryApplication {
     private static List<User> users = Arrays.asList(new User("John", "john"),
             new User("Niki", "niki"),
             new User("Henry", "henry"),
@@ -14,16 +14,12 @@ public class MainLibrary {
             new User("Johnny", "johnny"),
             new User("Blue", "blue"));
 
-    private static HashMap<User, List<Book>> userListBook = new HashMap<>();
     private static List<User> borrowerList = new ArrayList<>();
     private static Library library = new Library();
     private static User theUser;
 
-    private static Scanner firstInput = new Scanner(System.in);
-    private static Scanner userNameInput = new Scanner(System.in);
     private static Scanner choiceInput = new Scanner(System.in);
     private static Scanner userInput = new Scanner(System.in);
-    private static Scanner loanInput = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println("***************************************************************************");
@@ -34,18 +30,22 @@ public class MainLibrary {
         viewFirstOptionMenu();
     }
 
+    /*
+     * This method is used to the display the first option menu.
+     *
+     */
     public static void viewFirstOptionMenu() {
         int firstChoice = 0;
         while (firstChoice != 2) {
             System.out.println("1: Login");
             System.out.println("2: Exit");
             System.out.println("Enter Choice: ");
-            firstChoice = firstInput.nextInt();
+            firstChoice = getInputAsInteger();
 
             switch (firstChoice) {
                 case 1:
                     System.out.println("Enter Username: ");
-                    String username = userNameInput.nextLine();
+                    String username = userInput.nextLine();
                     theUser = getUserByName(username);
                     if (theUser != null) {
                         viewOptionMenu();
@@ -60,6 +60,9 @@ public class MainLibrary {
         }
     }
 
+    /*
+     * This method is used to display 2nd menu options.
+     */
     public static void viewOptionMenu() {
         int iChoice = 0;
         while (iChoice != 7) {
@@ -72,7 +75,7 @@ public class MainLibrary {
             System.out.println("5: Lend books to other users");
             System.out.println("6: Display all checked out information");
             System.out.println("7: Exit");
-            iChoice = choiceInput.nextInt();
+            iChoice = getInputAsInteger();
 
             switch (iChoice) {
                 case 1: // Display all books in the library.
@@ -101,6 +104,9 @@ public class MainLibrary {
         }
     }
 
+    /*
+     *  This method is used to display all the books in the library system.
+     */
     public static void displayAllBooks() {
         System.out.println("***************************************************************************");
         System.out.println("   TITLE" + "\tAUTHOR" + "\tISBN" + "\tFORMAT" + "\tGENRE" + "\tLANGUAGE" + "\tAVAILABILITY");
@@ -115,6 +121,9 @@ public class MainLibrary {
         viewOptionMenu();
     }
 
+    /*
+     *  This method is used to display all users in the library system.
+     */
     public static void displayAllUsers() {
         System.out.println("***************************************************************************");
         System.out.println("   USER" + "\tUSERNAME");
@@ -128,6 +137,9 @@ public class MainLibrary {
         viewOptionMenu();
     }
 
+    /*
+     * This method is used to display the selected check out option
+     */
     public static void displayCheckOutOption() {
         System.out.println("\nPlease enter ISBN to check out: ");
         String isbn = userInput.nextLine(); //read the ISBN from input
@@ -137,7 +149,9 @@ public class MainLibrary {
             boolean getCheckout = theUser.checkoutBook(book, library);
 
             if (getCheckout) {
-                System.out.println("You have successfully checked out the book!");
+                System.out.println("**********You have successfully checked out the book!**********");
+            } else {
+                System.out.println("**********You have reached your checked out amount " + theUser.getBooks().length + ".**********");
             }
         } else {
             System.out.println("No book for ISBN " + isbn + " found or it's not available.");
@@ -146,6 +160,9 @@ public class MainLibrary {
         viewOptionMenu();
     }
 
+    /*
+     * This method is used to display the selected check in option
+     */
     public static void displayCheckInOption() {
         if (theUser.getBookIndex() != 0) {
             System.out.println("\nPlease enter ISBN to be checked in: ");
@@ -159,7 +176,7 @@ public class MainLibrary {
                     }
                 }
             } else {
-                System.out.println("The book ISBN '" + strBookCheckInIsbn + "' is not in the library.");
+                System.out.println("You don't have that book with ISBN '" + strBookCheckInIsbn + "' to check in.");
             }
         } else {
             System.out.println("You have nothing to check in.\n");
@@ -168,6 +185,9 @@ public class MainLibrary {
         viewOptionMenu();
     }
 
+    /*
+     * This method is used to display the selected lend books option
+     */
     public static void displayLendBooksOption() {
         if (theUser.getBookIndex() != 0) {
             System.out.println("Please enter the borrower: ");
@@ -175,7 +195,7 @@ public class MainLibrary {
             User borrower = getUserByName(strName);
             if (borrower != null) {
                 System.out.println("Please enter how many books: ");
-                int totalBooks = userInput.nextInt();
+                int totalBooks = getInputAsInteger();
                 if (totalBooks <= theUser.getBookIndex()) {
                      if (totalBooks + borrower.getBookIndex() > theUser.getBooks().length) {
                         System.out.println("Borrower will have over the maximum (" + borrower.getBooks().length + ") amount of books.  " +
@@ -184,10 +204,13 @@ public class MainLibrary {
                         int theIndex = 1;
                         while (totalBooks > 0 && totalBooks >= theIndex) {
                             System.out.println(theIndex + ". Please enter the ISBN to be loaned or 0 back to main menu: ");
-                            String loanIsbn = loanInput.nextLine();
+                            String loanIsbn = userInput.nextLine();
                             if (!loanIsbn.equalsIgnoreCase("0")) {
                                 if (theUser.isBookAvailable(loanIsbn)) {
-                                    boolean isLendSucess = theUser.lendBook(theUser, borrower, loanIsbn);
+                                    boolean isLendSuccess = theUser.lendBook(theUser, borrower, loanIsbn);
+                                    if (isLendSuccess) {
+                                        System.out.println("You lend book with ISBN '" + loanIsbn + "' to " + borrower.getName() + ".");
+                                    }
                                     theIndex++;
                                 }
                             } else {
@@ -196,9 +219,11 @@ public class MainLibrary {
                         }
                     }
                 } else {
-                    System.out.println("You entered more books than you have.  Please try again.");
+                    System.out.println("You entered more amount than you have.  Please try again.");
                 }
-                removeOldBorrowerThenAddNewBorrower(borrower);
+                if (borrower.getBookIndex() != 0) {
+                    removeOldBorrowerThenAddNewBorrower(borrower);
+                }
             } else {
                 System.out.println("Unable to find " + strName + " in the user list.\n");
             }
@@ -208,6 +233,9 @@ public class MainLibrary {
         viewOptionMenu();
     }
 
+    /*
+     * This method is used to get the user from the user list in the library.
+     */
     public static User getUserByName(String username) {
         if (username != null) {
             for (User user : users) {
@@ -218,6 +246,9 @@ public class MainLibrary {
         return null;
     }
 
+    /*
+     * This method is used to display all the checked out information in the library.
+     */
     public static void displayAllCheckOutInformation() {
         boolean isBookCheckout = false;
         if (theUser.getBookIndex() > 0) {
@@ -230,10 +261,13 @@ public class MainLibrary {
         }
 
         if (!isBookCheckout) {
-            System.out.println("There is no book checking out.\n");
+            System.out.println("There is no book checking out in the library.\n");
         }
     }
 
+    /*
+     * This method is used to remove the old user then add the new user with the same username.
+     */
     public static void removeOldBorrowerThenAddNewBorrower(User borrower) {
         boolean isBorrowerExist = false;
         int borrowerIndex = 0;
@@ -249,5 +283,19 @@ public class MainLibrary {
         }
 
         borrowerList.add(borrower);
+    }
+
+    /*
+     *  Make sure user enter an integer.
+     */
+    public static int getInputAsInteger() {
+        while (true) {
+            try {
+                return choiceInput.nextInt();
+            } catch (InputMismatchException e) {
+                choiceInput.next();
+                System.out.print("That’s not an integer. Please try again: ");
+            }
+        }
     }
 }

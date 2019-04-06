@@ -10,22 +10,25 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class MainLibraryTest {
+public class MainLibraryApplicationTest {
     List<Book> books;
     List<User> users;
     User theUser;
-    User borrower;
+    User borrower1;
+    User borrower2;
     Library library;
 
     @Before
     public void beforeTestMethod() {
         library = new Library();
-        users = Arrays.asList(new User("John", "john"),
-                new User("Niki", "niki"),
+        users = Arrays.asList( new User("Niki", "niki"),
+                new User("John", "john"),
                 new User("Henry", "henry"),
-                new User("Tom", "tom"));
-        theUser = new User("Niki", "niki");
-        borrower = new User("Tom", "tom");
+                new User("Tom", "tom"),
+                new User("Brady", "brady"));
+        theUser = users.get(0);
+        borrower1 = new User("Tom", "tom");
+        borrower2 = new User("Brady", "brady");
 
         books = new ArrayList<>();
         books.add(new Book("Civil War", "Joe Schmoo", "11111", "pdf", "War", "Engish", true));
@@ -40,7 +43,8 @@ public class MainLibraryTest {
     public void afterTestMethod() {
         library = null;
         theUser = null;
-        borrower = null;
+        borrower1 = null;
+        borrower2 = null;
         books = null;
     }
 
@@ -81,7 +85,7 @@ public class MainLibraryTest {
         theUser.checkoutBook(books.get(0), library);
         theUser.checkoutBook(books.get(1), library);
 
-        theUser.lendBook(theUser, users.get(0), books.get(0).getIsbn());
+        theUser.lendBook(theUser, borrower1, books.get(0).getIsbn());
 
         // theUser should have 1 book now.
         assertEquals(1, theUser.getBookIndex());
@@ -108,7 +112,7 @@ public class MainLibraryTest {
 
     @Test
     public void testLendBooksWithNoBookToLendFail() {
-        assertEquals(false, theUser.lendBook(theUser, borrower, books.get(0).getIsbn()));
+        assertEquals(false, theUser.lendBook(theUser, borrower1, books.get(0).getIsbn()));
     }
 
     @Test
@@ -116,12 +120,15 @@ public class MainLibraryTest {
         theUser.checkoutBook(books.get(0), library);
         theUser.checkoutBook(books.get(1), library);
         theUser.checkoutBook(books.get(2), library);
-        assertEquals(3, theUser.getBookIndex());
+        theUser.checkoutBook(books.get(3), library);
+        assertEquals(4, theUser.getBookIndex());
 
-        theUser.lendBook(theUser, borrower, books.get(0).getIsbn());
-        theUser.lendBook(theUser, borrower, books.get(1).getIsbn());
-        assertEquals(1, theUser.getBookIndex());
+        theUser.lendBook(theUser, borrower1, books.get(0).getIsbn());
+        theUser.lendBook(theUser, borrower1, books.get(1).getIsbn());
+        assertEquals(2, borrower1.getBookIndex());          // Borrower #1
+        assertEquals(2, theUser.getBookIndex());            // The lender, amount is 2 now
 
-        assertEquals(2, borrower.getBookIndex());
+        theUser.lendBook(theUser, borrower2, books.get(2).getIsbn()); // Borrower #1
+        assertEquals(1, theUser.getBookIndex());            // The lender, amount is 1 now
     }
 }

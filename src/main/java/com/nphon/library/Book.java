@@ -1,5 +1,8 @@
 package com.nphon.library;
 
+/*
+ * This class is used for data model and it stores only information.
+ */
 public class Book {
     private final String title;
     private final String author;

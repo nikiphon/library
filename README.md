@@ -3,11 +3,12 @@
 Here are my the approach to design this system based on the requirement.
 
 For this system, we have 4 main classes here: 
+```
 * Users - is used to check out, check in and lend books to other users.
 * Book - has some attributes like ISBN which is used for searching and ‘available’ which is used to check whether the book is available to check out.  Most of the fields are immutable since we only need available field to track the status.
 * Library - use to contains books and check out and check in methods which are used to change the available.
-* MainLibrary - use to run the application and some other functionalities from the Scanner inputs.
-
+* MainLibraryApplication - use to run the application and some other functionalities from the Scanner inputs.
+```
 We have 2 main option menus.  The first option is the Login and Exit which is used to find out the main user and exit the system..  The second option we have Display all books, Display all users, Check out book, Check in book, Lend books to other users, Display all the checked out information and Exit.
 ```
 1. Display all books -  display all books in the library where we can use the ISBN.
@@ -35,11 +36,8 @@ For testing,  we have 7 methods to test the check out functionalities.  There ar
 ```
 1. User only visit one library.
 2. Unable to switch to other users while in the system.
-3. User class only has name and usename and no password.
+3. Single thread environment.
 4. No password need for the login since we only need the main user.
-5. Add new attributes to the book for searching.
-6. Add the amount of books to the loaner and borrower next to the name for clarity.
-7. I’ve tried to use one Scanner in the application for all the input but no luck.
 ```
 
 ### How to run
