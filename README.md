@@ -5,9 +5,9 @@ Here are my the approach to design this system based on the requirement.
 For this system, we have 4 main classes here: 
 ```
 * Users - is used to check out, check in and lend books to other users.
-* Book - has attributes like ISBN which is used for searching and ‘available’ which is used to check
-        whether the book is available to check out.  Most of the fields are immutable since we only need 
-        available field to track the status.
+* Book - has attributes like ISBN which is used for searching and ‘available’ which is used to 
+        check whether the book is available to check out.  Most of the fields are immutable 
+        since we only need available field to track the status.
 * Library - contains books and check out and check in methods which are used to change the available.
 * MainLibraryApplication - run the application and some other functionalities from the Scanner inputs.
 ```
