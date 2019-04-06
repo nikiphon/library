@@ -1,0 +1,12 @@
+title,author,registration_number, format,genre,language,availability
+"Civil War", "Joe Schmoo", "11111", "pdf", "War", "Engish", "true"
+"Mockingbird", "Jane Doe", "22222", "Hardcopy", "Children", "English", "true"
+"Unknown", "John Smith", "33333", "pdf", "History", "Engish", "true"
+"It", "Steven King", "44444", "Hardcover", "Horror", "Engish", "true"
+"Lord of the Ring", "Unknown", "55555", "Hardcover", "Sci-Fi", "Engish", "true"
+"Stars War", "Unknown", "66666", "Hardcover", "Sci-Fi", "Engish", "true"
+"Cold Lake", "Jeff Carson", "B00PTR6YUY", "Kindle", "Thriller", "Engish", "true"
+"The Mamba Mentality: How I Play", "Kobe Bryant", "0374201234", "Hardcover", "Sport", "Engish", "true"
+"The Forgotten 500", "Gregory A. Freeman", "0451224957", "Paperback", "War", "Engish", "true"
+"The Last Punisher", "Kevin Lacz", "B0176M3PUG", "Kindle", "War", "Engish", "true"
+"Ghost Soldiers", "Hampton Sides", "038549565X", "Paperback", "War", "Engish", "true"
