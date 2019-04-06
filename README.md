@@ -5,7 +5,8 @@ Here are my the approach to design this system based on the requirement.
 For this system, we have 4 main classes here: 
 ```
 * Users - is used to check out, check in and lend books to other users.
-* Book - has some attributes like ISBN which is used for searching and ‘available’ which is used to check whether the book is available to check out.  Most of the fields are immutable since we only need available field to track the status.
+* Book - has some attributes like ISBN which is used for searching and ‘available’ which is used to check
+        whether the book is available to check out.  Most of the fields are immutable since we only need available field to track the status.
 * Library - use to contains books and check out and check in methods which are used to change the available.
 * MainLibraryApplication - use to run the application and some other functionalities from the Scanner inputs.
 ```
@@ -30,7 +31,9 @@ The first 3 capabilities are kind of straight forward.  For the lending option, 
  check in and loan books to other users.  When adding the loaner to the borrowerList, I have to remove the old loaner 
  first then add the new loaner in order to avoid the duplicate loaner.
 
-For testing,  we have 7 methods to test the check out functionalities.  There are only 2 tests for check in either to check in with no check out amount or check in is success. As for lending, I have 3 tests inside a method.  I do not have the test for Login since the login function is only needed username and no password.  I can have the users passwords but it’s going to be hardcoded in either the external file or the MainLibrary when application is started.
+For testing,  we have 7 methods to test the check out functionalities.  There are only 2 tests for check 
+in either to check in with no check out amount or check in is success. As for lending, I have 3 tests inside a method.  I do not have the test for Login since the login function is only needed username and no password.  I can have the users passwords but it’s going to be hardcoded in either the external file or the 
+MainLibraryApplication when application is started.
 
 ### Below are the assumptions:
 ```
