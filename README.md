@@ -19,7 +19,15 @@ We have 2 main option menus.  The first option is the Login and Exit which is us
 7. Exit - exit the system.
 ```
 
-The first 3 capabilities are kind of straight forward.  For the lending option, we need to add more functionalities.  For example, we need to load multiple users to the system and have the login option since we need to find out the lender.  We also need to calculate the borrower amount of books so that he can’t accept any more books that is greater than the N amount.  If the loaner tries to loan more books to the borrower, the system will alert the loaner.  We use an array of books instead of list since we already know the N amounts from the requirement. This force me to introduce the ‘index’ variable to count the number of books the user has.  The variable changes when either check out, check in and loan books to other users.
+The first 3 capabilities are kind of straight forward.  For the lending option, we need to add more
+ functionalities.  For example, we need to load multiple users to the system and have the login option 
+ since we need to find out the lender.  We also need to calculate the borrower amount of books so that 
+ he can’t accept any more books that is greater than the N amount.  If the loaner tries to loan more 
+ books to the borrower, the system will alert the loaner.  We use an array of books instead of list 
+ since we already know the N amounts from the requirement. This force me to introduce the ‘index’ 
+ variable to count the number of books the user has.  The variable changes when either check out, 
+ check in and loan books to other users.  When adding the loaner to the borrowerList, I have to remove the old loaner 
+ first then add the new loaner in order to avoid the duplicate loaner.
 
 For testing,  we have 7 methods to test the check out functionalities.  There are only 2 tests for check in either to check in with no check out amount or check in is success. As for lending, I have 3 tests inside a method.  I do not have the test for Login since the login function is only needed username and no password.  I can have the users passwords but it’s going to be hardcoded in either the external file or the MainLibrary when application is started.
 
