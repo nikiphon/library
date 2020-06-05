@@ -20,15 +20,15 @@ dependencies {
 	compile('junit:junit:4.12')
 }
 
-//dependencies {
+dependencies {
 	//compile('org.springframework.boot:spring-boot-starter-data-rest')
 	//testCompile('org.springframework.boot:spring-boot-starter-test')
-	//compile('io.springfox:springfox-swagger2:2.8.0')
-	//compile('io.springfox:springfox-swagger-ui:2.8.0')
+	compile('io.springfox:springfox-swagger2:2.8.0')
+	compile('io.springfox:springfox-swagger-ui:2.8.0')
 	//compile('javax.xml.bind:jaxb-api:2.3.0')
 	//compile('com.googlecode.json-simple:json-simple:1.1.1')
 	//compile('commons-codec:commons-codec:1.5')
 	// JUnit and Mockito
 	//testCompile('junit:junit:4.12')
 	//testCompile('org.mockito:mockito-core:2.7.22')
-//}
+}
