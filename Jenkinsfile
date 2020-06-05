@@ -3,6 +3,7 @@ pipeline {
     environment {
         NEW_VERSION = '1.3.0'
         SERVER_CREDENTIALS = credentials('server-credentials')
+        EMAIL_TO = 'bkacha@yahoo.com'
     }
 
     stages {
@@ -38,6 +39,9 @@ pipeline {
     post {
         always {
             echo "I'm done..."
+            emailext body: 'Check console output at $BUILD_URL to view the results.',
+                       to: "${EMAIL_TO}",
+                  subject: 'Jenkins build is back to normal: $PROJECT_NAME - #$BUILD_NUMBER'
         }
         success {
             echo 'Success!!'
