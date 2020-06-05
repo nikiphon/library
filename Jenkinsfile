@@ -20,7 +20,7 @@ pipeline {
                 }
             }
             steps {
-                echo 'Testing an application.'
+                echo 'Testing an application in DEV.'
             }
         }
         stage('Deploy'){
@@ -28,7 +28,7 @@ pipeline {
                 echo 'Deploying an application.'
                 echo "Deploying an ${SERVER_CREDENTIALS}."
                 withCredentials([
-                    usernamePassword(credentials: 'server-credentials', usernameName: USER, passwordVariable: PWD])
+                    usernamePassword(credentials: 'git-credentials', usernameName: USER, passwordVariable: PWD)
                 ]) {
                       echo 'some script ${USER} , ${PWD}'
                 }
