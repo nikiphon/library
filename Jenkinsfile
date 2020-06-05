@@ -32,7 +32,7 @@ pipeline {
                 ]) {
                       echo 'some script ${USER} , ${PWD}'
                 }
-            )
+            }
         }
     }
 
